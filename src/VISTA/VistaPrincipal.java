@@ -2,17 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package ejercicio.psp4.version2.pkg0.GUI;
+package VISTA;
 
-import ejercicio.psp4.version2.pkg0.Analista;
-import ejercicio.psp4.version2.pkg0.ESaldoNoValido;
-import ejercicio.psp4.version2.pkg0.Empleado;
-import ejercicio.psp4.version2.pkg0.Lista;
-import ejercicio.psp4.version2.pkg0.Programador;
+import MODELO.Analista;
+import MODELO.ESaldoNoValido;
+import MODELO.Empleado;
+import CONTROLADOR.Lista;
+import MODELO.Programador;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.List;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 /**
@@ -21,11 +24,52 @@ import javax.swing.UIManager;
  */
 public class VistaPrincipal extends javax.swing.JFrame {
 
-    static Lista listaEmpleados = new Lista();
+    Lista listaEmpleados = new Lista();
+    Lista listaAnalistas = new Lista();
+    Lista listaProgramadores = new Lista();
+
+    VistaListaEmpleados VistaEmpleados;  // instanciamos un objeto de tipo VistaListaEmpleados para poder acceder al panel de jList.
 
     public VistaPrincipal() {
         initComponents();
 
+        VistaEmpleados = new VistaListaEmpleados(this);
+        
+        CrearEmpleados();
+
+        listaEmpleados.mostrarLista();
+
+    }
+
+    private void CrearEmpleados() {
+
+        try {
+            Programador prog1 = new Programador(1, "Rodrigo", "Masculino", 2000, 100, 4000);
+            Programador prog2 = new Programador(4, "Jesus", "Masculino", 1500, 200, 4000);
+            Programador prog3 = new Programador(6, "Maria", "Femenino", 1200, 150, 4000);
+            Programador prog4 = new Programador(2, "Steven", "Masculino", 2000, 200, 4000);
+            Programador prog5 = new Programador(5, "Carmen", "Mujer", 2000, 200, 4000);
+            listaEmpleados.insertar(prog1);
+            listaEmpleados.insertar(prog2);
+            listaEmpleados.insertar(prog3);
+            listaEmpleados.insertar(prog4);
+            listaEmpleados.insertar(prog5);
+
+        } catch (ESaldoNoValido ex) {
+            Logger.getLogger(VistaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            Analista analista1 = new Analista(9, "JuanAntonio", 3, 2000, 2500, 3050);
+            Analista analista2 = new Analista(12, "Tomás", 5, 2500, 3000, 4050);
+            Analista analista3 = new Analista(14, "Miguel", 1, 3000, 2000, 5000);
+            listaEmpleados.insertar(analista1);
+            listaEmpleados.insertar(analista2);
+            listaEmpleados.insertar(analista3);
+
+        } catch (ESaldoNoValido ex) {
+            Logger.getLogger(VistaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -42,7 +86,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnInsertarEmple = new javax.swing.JButton();
         btnVisualizarEmple = new javax.swing.JButton();
         btnCreadoMasivo = new javax.swing.JButton();
-        btnOrdenar = new javax.swing.JButton();
+        btnListaEmpleados = new javax.swing.JButton();
+        btnOrdenar1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         Contenido = new javax.swing.JPanel();
 
@@ -62,8 +107,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         setBackground(new java.awt.Color(0, 51, 204));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setForeground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(700, 700));
-        setPreferredSize(new java.awt.Dimension(200, 640));
         setResizable(false);
         setSize(new java.awt.Dimension(200, 200));
 
@@ -105,6 +148,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnGuardarEmple.setBorder(null);
         btnGuardarEmple.setBorderPainted(false);
         btnGuardarEmple.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGuardarEmple.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGuardarEmpleMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnGuardarEmpleMouseExited(evt);
+            }
+        });
         btnGuardarEmple.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarEmpleActionPerformed(evt);
@@ -117,6 +168,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnInsertarEmple.setBorder(null);
         btnInsertarEmple.setBorderPainted(false);
         btnInsertarEmple.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnInsertarEmple.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnInsertarEmpleMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnInsertarEmpleMouseExited(evt);
+            }
+        });
         btnInsertarEmple.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInsertarEmpleActionPerformed(evt);
@@ -129,6 +188,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnVisualizarEmple.setBorder(null);
         btnVisualizarEmple.setBorderPainted(false);
         btnVisualizarEmple.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVisualizarEmple.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnVisualizarEmpleMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnVisualizarEmpleMouseExited(evt);
+            }
+        });
         btnVisualizarEmple.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVisualizarEmpleActionPerformed(evt);
@@ -141,13 +208,59 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnCreadoMasivo.setBorder(null);
         btnCreadoMasivo.setBorderPainted(false);
         btnCreadoMasivo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCreadoMasivo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCreadoMasivoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCreadoMasivoMouseExited(evt);
+            }
+        });
+        btnCreadoMasivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreadoMasivoActionPerformed(evt);
+            }
+        });
 
-        btnOrdenar.setBackground(new java.awt.Color(26, 73, 136));
-        btnOrdenar.setForeground(new java.awt.Color(255, 255, 255));
-        btnOrdenar.setText("ORDENAR");
-        btnOrdenar.setBorder(null);
-        btnOrdenar.setBorderPainted(false);
-        btnOrdenar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnListaEmpleados.setBackground(new java.awt.Color(26, 73, 136));
+        btnListaEmpleados.setForeground(new java.awt.Color(255, 255, 255));
+        btnListaEmpleados.setText("LISTA DE EMPLEADOS");
+        btnListaEmpleados.setBorder(null);
+        btnListaEmpleados.setBorderPainted(false);
+        btnListaEmpleados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnListaEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnListaEmpleadosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnListaEmpleadosMouseExited(evt);
+            }
+        });
+        btnListaEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListaEmpleadosActionPerformed(evt);
+            }
+        });
+
+        btnOrdenar1.setBackground(new java.awt.Color(26, 73, 136));
+        btnOrdenar1.setForeground(new java.awt.Color(255, 255, 255));
+        btnOrdenar1.setText("ORDENAR");
+        btnOrdenar1.setBorder(null);
+        btnOrdenar1.setBorderPainted(false);
+        btnOrdenar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnOrdenar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnOrdenar1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnOrdenar1MouseExited(evt);
+            }
+        });
+        btnOrdenar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOrdenar1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -156,15 +269,16 @@ public class VistaPrincipal extends javax.swing.JFrame {
             .addComponent(btnCargarEmple, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnGuardarEmple, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnInsertarEmple, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnVisualizarEmple, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+            .addComponent(btnVisualizarEmple, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnCreadoMasivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnOrdenar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnListaEmpleados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(btnOrdenar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,8 +298,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCreadoMasivo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnOrdenar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(btnOrdenar1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(btnListaEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel4.setBackground(new java.awt.Color(0, 51, 102));
@@ -194,7 +309,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,13 +332,13 @@ public class VistaPrincipal extends javax.swing.JFrame {
         );
 
         Contenido.setBackground(new java.awt.Color(255, 255, 255));
-        Contenido.setMaximumSize(new java.awt.Dimension(617, 531));
+        Contenido.setMaximumSize(new java.awt.Dimension(1000, 600));
 
         javax.swing.GroupLayout ContenidoLayout = new javax.swing.GroupLayout(Contenido);
         Contenido.setLayout(ContenidoLayout);
         ContenidoLayout.setHorizontalGroup(
             ContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 533, Short.MAX_VALUE)
+            .addGap(0, 922, Short.MAX_VALUE)
         );
         ContenidoLayout.setVerticalGroup(
             ContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,12 +352,13 @@ public class VistaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Contenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(Contenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Contenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -250,20 +366,37 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     private void btnVisualizarEmpleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarEmpleActionPerformed
 
-        Visualizar visualizarDatosEmple = new Visualizar();
+        /*Visualizar visualizarDatosEmple = new Visualizar();
         visualizarDatosEmple.setSize(540, 650);
         visualizarDatosEmple.setLocation(0, 0);
 
         Contenido.removeAll();
         Contenido.add(visualizarDatosEmple, BorderLayout.CENTER);
         Contenido.revalidate();
+        Contenido.repaint();*/
+        EmpleVisualizar vista = new EmpleVisualizar(this);
+        vista.setSize(740, 650);
+        vista.setLocation(0, 0);
+
+        Contenido.removeAll();
+        Contenido.add(vista, BorderLayout.CENTER);
+        Contenido.revalidate();
         Contenido.repaint();
+
+
     }//GEN-LAST:event_btnVisualizarEmpleActionPerformed
 
     private void btnInsertarEmpleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarEmpleActionPerformed
 
-        /*VistaEmpleado.setVisible(true);
-        VistaEmpleado.setLocationRelativeTo(null);*/
+        InsertarVista visualizarInsertar = new InsertarVista(this);
+        visualizarInsertar.setSize(740, 650);
+        visualizarInsertar.setLocation(0, 0);
+
+        Contenido.removeAll();
+        Contenido.add(visualizarInsertar, BorderLayout.CENTER);
+        Contenido.revalidate();
+        Contenido.repaint();
+
     }//GEN-LAST:event_btnInsertarEmpleActionPerformed
 
     private void btnGuardarEmpleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarEmpleActionPerformed
@@ -284,7 +417,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private void btnCargarEmpleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarEmpleActionPerformed
 
         CargarEmpleados cargarEmpleadosVista = new CargarEmpleados();
-        cargarEmpleadosVista.setSize(531, 650);
+        cargarEmpleadosVista.setSize(740, 650);
         cargarEmpleadosVista.setLocation(0, 0);
 
         Contenido.removeAll();
@@ -296,7 +429,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     private void btnCargarEmpleMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCargarEmpleMouseExited
 
-        //btnCargarEmple.setBackground(Color.[26,73,136]);
+        btnCargarEmple.setBackground(new Color(26, 73, 136));
     }//GEN-LAST:event_btnCargarEmpleMouseExited
 
     private void btnCargarEmpleMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCargarEmpleMouseEntered
@@ -305,6 +438,87 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnCargarEmpleMouseEntered
 
+    private void btnGuardarEmpleMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarEmpleMouseEntered
+
+        btnGuardarEmple.setBackground(Color.blue);
+    }//GEN-LAST:event_btnGuardarEmpleMouseEntered
+
+    private void btnInsertarEmpleMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInsertarEmpleMouseEntered
+
+        btnInsertarEmple.setBackground(Color.blue);
+    }//GEN-LAST:event_btnInsertarEmpleMouseEntered
+
+    private void btnVisualizarEmpleMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVisualizarEmpleMouseEntered
+
+        btnVisualizarEmple.setBackground(Color.blue);
+    }//GEN-LAST:event_btnVisualizarEmpleMouseEntered
+
+    private void btnCreadoMasivoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCreadoMasivoMouseEntered
+
+        btnCreadoMasivo.setBackground(Color.blue);
+    }//GEN-LAST:event_btnCreadoMasivoMouseEntered
+
+    private void btnListaEmpleadosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListaEmpleadosMouseEntered
+
+        btnListaEmpleados.setBackground(Color.blue);
+    }//GEN-LAST:event_btnListaEmpleadosMouseEntered
+
+    private void btnGuardarEmpleMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarEmpleMouseExited
+
+        btnGuardarEmple.setBackground(new Color(26, 73, 136));
+    }//GEN-LAST:event_btnGuardarEmpleMouseExited
+
+    private void btnInsertarEmpleMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInsertarEmpleMouseExited
+
+        btnInsertarEmple.setBackground(new Color(26, 73, 136));
+    }//GEN-LAST:event_btnInsertarEmpleMouseExited
+
+    private void btnVisualizarEmpleMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVisualizarEmpleMouseExited
+
+        btnVisualizarEmple.setBackground(new Color(26, 73, 136));
+    }//GEN-LAST:event_btnVisualizarEmpleMouseExited
+
+    private void btnCreadoMasivoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCreadoMasivoMouseExited
+
+        btnCreadoMasivo.setBackground(new Color(26, 73, 136));
+    }//GEN-LAST:event_btnCreadoMasivoMouseExited
+
+    private void btnListaEmpleadosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListaEmpleadosMouseExited
+        btnListaEmpleados.setBackground(new Color(26, 73, 136));
+    }//GEN-LAST:event_btnListaEmpleadosMouseExited
+
+    private void btnOrdenar1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrdenar1MouseEntered
+
+        btnOrdenar1.setBackground(Color.blue);
+    }//GEN-LAST:event_btnOrdenar1MouseEntered
+
+    private void btnOrdenar1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrdenar1MouseExited
+
+        btnOrdenar1.setBackground(new Color(26, 73, 136));
+    }//GEN-LAST:event_btnOrdenar1MouseExited
+
+    private void btnOrdenar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnOrdenar1ActionPerformed
+
+    private void btnListaEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaEmpleadosActionPerformed
+
+        VistaEmpleados = new VistaListaEmpleados(this);
+        VistaEmpleados.setSize(740, 650);
+        VistaEmpleados.setLocation(0, 0);
+
+        Contenido.removeAll();
+        Contenido.add(VistaEmpleados, BorderLayout.CENTER);
+        Contenido.revalidate();
+        Contenido.repaint();
+
+    }//GEN-LAST:event_btnListaEmpleadosActionPerformed
+
+    private void btnCreadoMasivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreadoMasivoActionPerformed
+
+
+    }//GEN-LAST:event_btnCreadoMasivoActionPerformed
+
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -312,32 +526,19 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
                 VistaPrincipal vista = new VistaPrincipal();
 
-                vista.setSize(800, 670);
+                vista.setSize(940, 670);
 
                 vista.show();
 
                 Lista listaEmpleados = new Lista();
 
                 // averiguar como pasar los empleados creados aqui para llevarlos a otros FRAMES (visualizar)
-                try {
-                    Programador prog1 = new Programador(1, "Rodrigo", "Masculino", 2000, 100, 4000);
-                    Programador prog2 = new Programador(4, "Jesus", "Masculino", 1500, 200, 4000);
-                    Programador prog3 = new Programador(6, "Maria", "Femenino", 1200, 150, 4000);
-                    Programador prog4 = new Programador(2, "Steven", "Masculino", 2000, 200, 4000);
-                    listaEmpleados.insertar(prog1);
-                    listaEmpleados.insertar(prog2);
-                    listaEmpleados.insertar(prog3);
-                    listaEmpleados.insertar(prog4);
-
-                } catch (ESaldoNoValido ex) {
-                    Logger.getLogger(VistaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
                 //listaEmpleados.mostrarLista();
                 //listaEmpleados.mostrarLista();
             }
 
         });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -346,7 +547,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnCreadoMasivo;
     private javax.swing.JButton btnGuardarEmple;
     private javax.swing.JButton btnInsertarEmple;
-    private javax.swing.JButton btnOrdenar;
+    private javax.swing.JButton btnListaEmpleados;
+    private javax.swing.JButton btnOrdenar1;
     private javax.swing.JButton btnVisualizarEmple;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

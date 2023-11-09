@@ -2,13 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ejercicio.psp4.version2.pkg0;
+package CONTROLADOR;
 
+import MODELO.Empleado;
+import java.io.EOFException;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -201,6 +206,12 @@ public class Lista<E> implements Serializable { //------------------------------
             Logger.getLogger(Lista.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public Lista getListaEmpleados(Lista listaEmpleados){
+        return listaEmpleados;
+    }
+    
+    //PARA GUARDAR ARCHIVO EMPLEADOS
 
     public void serialization() {
 
@@ -225,6 +236,39 @@ public class Lista<E> implements Serializable { //------------------------------
         }
 
     }
+    
+    //PARA CARGAR ARCHIVO EMPLEADOS
+    
+    /*public ArrayList<E> Deserializar(String filePath){
+        ArrayList<E> lista = new ArrayList<E>();
+        try {
+            FileInputStream fileIn = new FileInputStream(filePath);
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            //nuevaLista = (MyList) in.readObject();
+
+            // while(in.available()>0){ NO FUNCIONA
+            try{
+                while(true){
+                    // si añadimos los empleados desde aqui, no podemos añadir el indice de los empleados
+                    // asi q los metemos en un arraylist los empleados para añadirlos luego
+                    // a la lista con el indice
+                    //add((E)in.readObject());
+                    lista.add((E)in.readObject());
+                }
+            }catch(EOFException ex){};
+
+            in.close();
+            fileIn.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Lista.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            //Logger.getLogger(MyList.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Ha ocurrido un error con la eleccion del fichero, puede que no sea tipo .ser o el contenido es de una version anterior.");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Lista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }*/
 
     // METODO QUE GUARDA EN nodoVisualizar (el empleado actual) el empleado siguiente.
     public E avanzar() {
@@ -238,8 +282,8 @@ public class Lista<E> implements Serializable { //------------------------------
     /*public void visualizarAnterior() //recorre desde el principio de la lista para toparse con el que va antes del visualizado
     {
 
-        nodoAnterior = null;
-        nodoActual = inicio;
+        Nodo<E> nodoAnterior = null;
+        Nodo<E> nodoActual = inicio;
 
         while (nodoActual != nodoVisualizar) {
             nodoAnterior = nodoActual;
@@ -248,6 +292,7 @@ public class Lista<E> implements Serializable { //------------------------------
 
         nodoVisualizar = nodoAnterior;
     }*/
+    
     public Nodo<E> getFin() {
         return fin;
     }

@@ -1,4 +1,4 @@
-package ejercicio.psp4.version2.pkg0;
+package MODELO;
 
 public class ESaldoNoValido extends Exception {        
     public ESaldoNoValido() {}

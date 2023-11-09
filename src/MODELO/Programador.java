@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ejercicio.psp4.version2.pkg0;
+package MODELO;
 
-import static ejercicio.psp4.version2.pkg0.IFecha.AÑO;
-import static ejercicio.psp4.version2.pkg0.IFecha.DIA_DEL_MES;
-import static ejercicio.psp4.version2.pkg0.IFecha.MES_DEL_AÑO;
+import static MODELO.IFecha.AÑO;
+import static MODELO.IFecha.DIA_DEL_MES;
+import static MODELO.IFecha.MES_DEL_AÑO;
 import java.util.GregorianCalendar;
 
 /**
