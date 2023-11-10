@@ -52,7 +52,7 @@ public class Programador extends Empleado implements IFecha{
     
     @Override
     public String toString() {
-        return "Programador{" + "Nombre=" + Nombre + ", Sueldo=" + Sueldo + ", SueldoMax="  + SueldoMax + ", FechaAlta=" + FechaAlta + ", SueldoExtraMensual=" + SueldoExtraMensual + ", Genero=" + Genero + '}';
+        return "Programador{" +"Numero Empleado=" + numeroEmple + ", Nombre=" + Nombre + ", Sueldo=" + Sueldo + ", SueldoMax="  + SueldoMax + ", FechaAlta=" + FechaAlta + ", SueldoExtraMensual=" + SueldoExtraMensual + ", Genero=" + Genero + '}';
     }
 
     @Override

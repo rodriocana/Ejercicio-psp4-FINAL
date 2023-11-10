@@ -111,7 +111,7 @@ public class Empleado implements Serializable {
 
     @Override
     public String toString() {
-        return "Empleado{" + "Nombre=" + Nombre + ", Sueldo=" + Sueldo + ", SueldoMax=" + SueldoMax + ", FechaAlta=" + FechaAlta + '}';
+        return "Empleado{ " + "NumeroEmpleado=" + numeroEmple + " , Nombre=" + Nombre +", Sueldo=" + Sueldo + ", SueldoMax=" + SueldoMax + ", FechaAlta=" + FechaAlta + '}';
     }
 
 }

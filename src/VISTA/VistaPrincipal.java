@@ -13,6 +13,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.List;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -34,11 +35,65 @@ public class VistaPrincipal extends javax.swing.JFrame {
         initComponents();
 
         VistaEmpleados = new VistaListaEmpleados(this);
-        
+
         CrearEmpleados();
 
+        //mostrarEmpleados();  // para mostrarlos todos juntos
+        agregarEmpleadosAListas(); // aqui guardo en dos listas distintas a los empleados, lista Analistas y lista Programadores
+        mostrarAnalistas();
+        mostrarProgramadores();
+
+    }
+
+    public void crearEmpleadosMasivos() throws ESaldoNoValido {
+
+        Random random = new Random();
+        int cantidadEmpleados = random.nextInt(200) + 1000; // He metido menos empleados por que tardaba mucho en ordenarlos
+
+        for (int i = 0; i < cantidadEmpleados; i++) {
+            // Generar valores aleatorios para el sueldo y sueldo máximo
+            double sueldo = 2000; // Entre 1000 y 5000
+            double sueldoMax = 4000;// Mayor que el sueldo
+
+            String[] nombres = {"Juan", "María", "Luis", "Ana", "Carlos", "Laura", "Pedro", "Sofía", "Diego", "Valeria"};
+            String nombreAleatorio = nombres[random.nextInt(nombres.length)];
+            int numeroEmpleado = random.nextInt(2000) + 1;
+            //empleado.setNombre(nombreAleatorio); // Nombre aleatorio
+
+            // Crear el empleado con los atributos aleatorios
+            Empleado empleado = new Empleado();
+            empleado.setNumeroEmple(numeroEmpleado); // Establecer el número de empleado
+            empleado.setNombre(" " + nombreAleatorio); // Nombre aleatorio o puedes usar bibliotecas para nombres aleatorios
+            //empleado.setSueldo(2000); // Establecer el sueldo
+            //empleado.setSueldoMax(4000); // Establecer el sueldo máximo
+
+            // Comprobar que el sueldo sea menor que el sueldo máximo
+            if (sueldo < sueldoMax) {
+                // Añadir el empleado a la lista principal de empleados
+                listaEmpleados.insertar(empleado);
+            } else {
+                System.out.println("Sueldo mayor que sueldo máximo. No se ha creado el empleado " + empleado.getNumeroEmple());
+            }
+        }
+        System.out.println("Se han creado " + cantidadEmpleados + " empleados de forma aleatoria.");
+    }
+
+    public void agregarEmpleadosAListas() {
+
+        listaEmpleados.agregarEmpleadosAListas(listaAnalistas, listaProgramadores);
+    }
+
+    public void mostrarEmpleados() {
         listaEmpleados.mostrarLista();
 
+    }
+
+    public void mostrarAnalistas() {
+        listaAnalistas.mostrarAnalistas();
+    }
+
+    public void mostrarProgramadores() {
+        listaProgramadores.mostrarProgramadores();
     }
 
     private void CrearEmpleados() {
@@ -60,9 +115,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
         }
 
         try {
-            Analista analista1 = new Analista(9, "JuanAntonio", 3, 2000, 2500, 3050);
-            Analista analista2 = new Analista(12, "Tomás", 5, 2500, 3000, 4050);
-            Analista analista3 = new Analista(14, "Miguel", 1, 3000, 2000, 5000);
+            Analista analista1 = new Analista(25, "Juan Antonio", 3, 2000, 2500, 3050);
+            Analista analista2 = new Analista(99, "Tomás", 5, 2500, 3000, 4050);
+            Analista analista3 = new Analista(8, "Miguel", 1, 3000, 2000, 5000);
             listaEmpleados.insertar(analista1);
             listaEmpleados.insertar(analista2);
             listaEmpleados.insertar(analista3);
@@ -320,7 +375,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -338,7 +393,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         Contenido.setLayout(ContenidoLayout);
         ContenidoLayout.setHorizontalGroup(
             ContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 922, Short.MAX_VALUE)
+            .addGap(0, 916, Short.MAX_VALUE)
         );
         ContenidoLayout.setVerticalGroup(
             ContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -498,7 +553,10 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOrdenar1MouseExited
 
     private void btnOrdenar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenar1ActionPerformed
-        // TODO add your handling code here:
+
+        System.out.println("Se ha ordenado la lista en JList");
+        listaEmpleados.ordenarPorNumeroEmpleado();
+        //listaAnalistas.ordenarPorNumeroEmpleado(); // si quiero ordenar solamente los analistas
     }//GEN-LAST:event_btnOrdenar1ActionPerformed
 
     private void btnListaEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaEmpleadosActionPerformed
@@ -516,7 +574,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     private void btnCreadoMasivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreadoMasivoActionPerformed
 
-
+        try {
+            crearEmpleadosMasivos();
+        } catch (ESaldoNoValido ex) {
+            Logger.getLogger(VistaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnCreadoMasivoActionPerformed
 
     public static void main(String args[]) {

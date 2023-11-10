@@ -38,13 +38,13 @@ public class VistaListaEmpleados extends javax.swing.JPanel {
 
         Nodo aux = Vista.listaEmpleados.getInicio();
 
-        //Vista.listaEmpleados = Vista.listaEmpleados.getListaEmpleados(Vista.listaEmpleados);
+        
         while (aux != null) {
 
             if (aux.getPrincipal() instanceof Empleado) {
 
-                String infoObjeto = "Información del objeto: " + aux.getPrincipal().toString();
-                modelo.addElement(infoObjeto);
+                String infoObjeto = aux.getPrincipal().toString();  // POR QUE ESTA LINEA SE IMPRIME???
+                modelo.addElement(infoObjeto);  // LE PASO infoObjeto y ahi dentro va cada toString de cada empleado
 
             } else {
                 modelo.addElement("No hay elementos");
@@ -70,7 +70,7 @@ public class VistaListaEmpleados extends javax.swing.JPanel {
         jScrollPane1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(0, 0, 0), null, null));
         jScrollPane1.setForeground(new java.awt.Color(0, 51, 204));
 
-        jList1.setBackground(new java.awt.Color(0, 204, 255));
+        jList1.setBackground(new java.awt.Color(0, 51, 51));
         jList1.setFont(new java.awt.Font("Sitka Heading", 1, 12)); // NOI18N
         jList1.setForeground(new java.awt.Color(255, 255, 255));
         jList1.setModel(new javax.swing.AbstractListModel<String>() {

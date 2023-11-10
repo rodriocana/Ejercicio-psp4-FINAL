@@ -4,7 +4,9 @@
  */
 package CONTROLADOR;
 
+import MODELO.Analista;
 import MODELO.Empleado;
+import MODELO.Programador;
 import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -14,6 +16,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -89,7 +92,48 @@ public class Lista<E> implements Serializable { //------------------------------
         }
     }
 
-    public boolean Sort() {
+    public void agregarEmpleadosAListas(Lista listaAnalistas, Lista listaProgramadores) {
+        Nodo<E> temporal = this.inicio;
+        while (temporal != null) {
+            Empleado empleado = (Empleado) temporal.getPrincipal();
+
+            if (empleado instanceof Analista) {
+                listaAnalistas.insertar(empleado);
+            } else if (empleado instanceof Programador) {
+                listaProgramadores.insertar(empleado);
+            }
+
+            temporal = temporal.getSiguiente();
+        }
+
+    }
+
+    public void mostrarAnalistas() {
+        Nodo<E> temporal = this.inicio;
+        System.out.println("****ANALISTAS****");
+        while (temporal != null) {
+            Empleado empleado = (Empleado) temporal.getPrincipal();
+            if (empleado instanceof Analista) {
+                System.out.println(empleado);
+            }
+            temporal = temporal.getSiguiente();
+
+        }
+    }
+
+    public void mostrarProgramadores() {
+        Nodo<E> temporal = this.inicio;
+        System.out.println("****PROGRAMADORES****");
+        while (temporal != null) {
+            Empleado empleado = (Empleado) temporal.getPrincipal();
+            if (empleado instanceof Programador) {
+                System.out.println(empleado);
+            }
+            temporal = temporal.getSiguiente();
+        }
+    }
+
+    /*public boolean Sort() {
 
         Nodo<E> emple1 = inicio;
         Nodo<E> emple2 = emple1.siguiente;
@@ -100,7 +144,7 @@ public class Lista<E> implements Serializable { //------------------------------
 
                 if (emple1.getIndice() > emple2.getIndice()) {
 
-                    //intercambiar
+                   // intercambiarNodos();
                 }
 
                 emple2 = emple2.getSiguiente();
@@ -113,10 +157,33 @@ public class Lista<E> implements Serializable { //------------------------------
 
         return true;
 
+    }*/
+    // METODO PARA ORDENAR POR NUMERO EMPLEADO
+    public void ordenarPorNumeroEmpleado() {
+        Nodo<E> empleado1, empleado2;
+        boolean cambios;
+
+        do {
+            cambios = false;  // booleano
+            empleado1 = inicio;
+
+            while (empleado1 != null && empleado1.getSiguiente() != null) {
+                empleado2 = empleado1.getSiguiente();
+
+                if (((Empleado) empleado1.getPrincipal()).getNumeroEmple() > ((Empleado) empleado2.getPrincipal()).getNumeroEmple()) {
+                    intercambiarNodos(empleado1, empleado2);
+                    cambios = true;
+                }
+                empleado1 = empleado1.getSiguiente();
+            }
+        } while (cambios);
     }
+    // METODO PARA INTERCAMBIAR UN NODO POR OTRO
 
-    public void Intercambiar() {
-
+    private void intercambiarNodos(Nodo<E> nodo1, Nodo<E> nodo2) {
+        E temporal = nodo1.getPrincipal();
+        nodo1.setPrincipall(nodo2.getPrincipal());
+        nodo2.setPrincipall(temporal);
     }
 
     public void mostrarLista() {
@@ -140,7 +207,7 @@ public class Lista<E> implements Serializable { //------------------------------
         }
     }
 
-    public void BorrarNodo(E emple) {
+    /*public void BorrarNodo(E emple){
 
         Nodo<E> temporal = this.inicio;
         while (temporal != null) {
@@ -169,16 +236,16 @@ public class Lista<E> implements Serializable { //------------------------------
             temporal = temporal.getSiguiente();
         }
         contador--;
-    }
+    }*/
 
-    public void borrarTodo() {
+ /*public void borrarTodo() {
         this.contador = 0;
         this.fin = null;
         this.inicio = null;
         this.actual = null;
-    }
+    }*/
 
-    /*public void modificar(E nodeToModify,E newData){  // new data para añador nuevos datos en textfield
+ /*public void modificar(E nodeToModify,E newData){  // new data para añador nuevos datos en textfield
         Nodo<E> temporal = this.inicio;
         while (temporal != null){
             if(temporal.getPrincipal()== nodeToModify){
@@ -206,13 +273,12 @@ public class Lista<E> implements Serializable { //------------------------------
             Logger.getLogger(Lista.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public Lista getListaEmpleados(Lista listaEmpleados){
+
+    public Lista getListaEmpleados(Lista listaEmpleados) {
         return listaEmpleados;
     }
-    
-    //PARA GUARDAR ARCHIVO EMPLEADOS
 
+    //PARA GUARDAR ARCHIVO EMPLEADOS
     public void serialization() {
 
         try {
@@ -226,7 +292,7 @@ public class Lista<E> implements Serializable { //------------------------------
                 out.writeObject(aux.getPrincipal());
                 aux = aux.getSiguiente();
             }
-        System.out.println("Lista de empleados guardada correctamente en serializated.ser");
+            System.out.println("Lista de empleados guardada correctamente en serializated.ser");
             out.close();
             fileOut.close();
         } catch (FileNotFoundException ex) {
@@ -236,9 +302,8 @@ public class Lista<E> implements Serializable { //------------------------------
         }
 
     }
-    
+
     //PARA CARGAR ARCHIVO EMPLEADOS
-    
     /*public ArrayList<E> Deserializar(String filePath){
         ArrayList<E> lista = new ArrayList<E>();
         try {
@@ -269,7 +334,6 @@ public class Lista<E> implements Serializable { //------------------------------
         }
         return lista;
     }*/
-
     // METODO QUE GUARDA EN nodoVisualizar (el empleado actual) el empleado siguiente.
     public E avanzar() {
 
@@ -292,7 +356,19 @@ public class Lista<E> implements Serializable { //------------------------------
 
         nodoVisualizar = nodoAnterior;
     }*/
-    
+    public E visualizarAnterior() {
+        if (this.actual == null || this.actual.getAnterior() == null) {
+            return null; // No hay empleado anterior
+        } else {
+            this.actual = this.actual.getAnterior();
+            if (this.actual != null) {
+                return this.actual.getPrincipal();
+            } else {
+                return null; // El nodo actual se ha vuelto nulo
+            }
+        }
+    }
+
     public Nodo<E> getFin() {
         return fin;
     }

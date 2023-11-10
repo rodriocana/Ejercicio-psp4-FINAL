@@ -1,5 +1,6 @@
 package VISTA;
 
+import CONTROLADOR.Lista.Nodo;
 import MODELO.Analista;
 import MODELO.Empleado;
 import MODELO.ESaldoNoValido;
@@ -25,62 +26,47 @@ public class EmpleVisualizar extends javax.swing.JPanel {
         initComponents();
 
         this.Vista = Vista;
+
+        //mostrarProgramadores();
+        //mostrarAnalistas();
     }
 
     public void mostrarEmpleados() {
-        /*
-        if (listaEmpleados.getActual().getPrincipal() instanceof Analista) {
-            Analista EmpleadoActualAux2 = (Analista) listaEmpleados.getActual().getPrincipal();
-            txtNumeroEmpleadoAnalista.setText(Integer.toString(EmpleadoActualAux2.getNumeroEmple()));
-            txtNombreAnalista.setText(EmpleadoActualAux2.getNombre());
-            txtSueldoAnalista.setText(Double.toString(EmpleadoActualAux2.getSueldo()));
-            txtSueldoMaxAnalista.setText(Double.toString(EmpleadoActualAux2.getSueldoMax()));
-            txtAñosTrabajadosAnalista.setText(Double.toString(EmpleadoActualAux2.getAñosTrabajados()));
-            txtPlusAnualAnalista.setText(Double.toString(EmpleadoActualAux2.getPlusAnual()));
-            txtFechaAltaAnalista.setText(EmpleadoActualAux2.getFechaAlta().getTime().toString());
-        } else if (listaEmpleados.getActual().getPrincipal() instanceof Programador) {
-            Programador EmpleadoActualAux = (Programador) listaEmpleados.getActual().getPrincipal();
-            txtNumeroEmpleadoProg1.setText(Integer.toString(EmpleadoActualAux.getNumeroEmple()));
-            txtNombreProg1.setText(EmpleadoActualAux.getNombre());
-            txtSueldoProg1.setText(Double.toString(EmpleadoActualAux.getSueldo()));
-            txtSueldoMaxProg1.setText(Double.toString(EmpleadoActualAux.getSueldoMax()));
-            txtSueldoExtrMensualProg1.setText(Double.toString(EmpleadoActualAux.getSueldoExtraMensual()));
-            txtGeneroProg1.setText(EmpleadoActualAux.getGenero());
-            txtFechaAltaProg1.setText(EmpleadoActualAux.getFechaAlta().getTime().toString());
-        } else {
-            // Manejar otro tipo de empleado o situación
-        }*/
+
+        Empleado EmpleadoActualAux2 = (Empleado) Vista.listaEmpleados.getActual().getPrincipal();
+        txtNumeroEmpleadoAnalista.setText(Integer.toString(EmpleadoActualAux2.getNumeroEmple()));
+        txtNombreAnalista.setText(EmpleadoActualAux2.getNombre());
+        txtSueldoAnalista.setText(Double.toString(EmpleadoActualAux2.getSueldo()));
+        txtSueldoMaxAnalista.setText(Double.toString(EmpleadoActualAux2.getSueldoMax()));
+        //txtAñosTrabajadosAnalista.setText(Double.toString(EmpleadoActualAux2.getAñosTrabajados()));
+        //txtPlusAnualAnalista.setText(Double.toString(EmpleadoActualAux2.getPlusAnual()));
+        //txtFechaAltaAnalista.setText(EmpleadoActualAux2.getFechaAlta().getTime().toString());
 
     }
 
     public void mostrarProgramadores() {
 
-        if (Vista.listaEmpleados.getActual().getPrincipal() instanceof Programador) {
-            Programador EmpleadoActualAux = (Programador) Vista.listaEmpleados.getActual().getPrincipal();
-            txtNumeroEmpleadoProg1.setText(Integer.toString(EmpleadoActualAux.getNumeroEmple()));
-            txtNombreProg1.setText(EmpleadoActualAux.getNombre());
-            txtSueldoProg1.setText(Double.toString(EmpleadoActualAux.getSueldo()));
-            txtSueldoMaxProg1.setText(Double.toString(EmpleadoActualAux.getSueldoMax()));
-            txtSueldoExtrMensualProg1.setText(Double.toString(EmpleadoActualAux.getSueldoExtraMensual()));
-            txtGeneroProg1.setText(EmpleadoActualAux.getGenero());
-            txtFechaAltaProg1.setText(EmpleadoActualAux.getFechaAlta().getTime().toString());
-        }
+        Programador EmpleadoActualAux = (Programador) Vista.listaProgramadores.getActual().getPrincipal();
+        txtNumeroEmpleadoProg1.setText(Integer.toString(EmpleadoActualAux.getNumeroEmple()));
+        txtNombreProg1.setText(EmpleadoActualAux.getNombre());
+        txtSueldoProg1.setText(Double.toString(EmpleadoActualAux.getSueldo()));
+        txtSueldoMaxProg1.setText(Double.toString(EmpleadoActualAux.getSueldoMax()));
+        txtSueldoExtrMensualProg1.setText(Double.toString(EmpleadoActualAux.getSueldoExtraMensual()));
+        txtGeneroProg1.setText(EmpleadoActualAux.getGenero());
+        txtFechaAltaProg1.setText(EmpleadoActualAux.getFechaAlta().getTime().toString());
 
     }
 
     public void mostrarAnalistas() {
 
-        if (Vista.listaEmpleados.getActual().getPrincipal() instanceof Analista) {
-            Analista EmpleadoActualAux2 = (Analista) Vista.listaEmpleados.getActual().getPrincipal();
-            txtNumeroEmpleadoAnalista.setText(Integer.toString(EmpleadoActualAux2.getNumeroEmple()));
-            txtNombreAnalista.setText(EmpleadoActualAux2.getNombre());
-            txtSueldoAnalista.setText(Double.toString(EmpleadoActualAux2.getSueldo()));
-            txtSueldoMaxAnalista.setText(Double.toString(EmpleadoActualAux2.getSueldoMax()));
-            txtAñosTrabajadosAnalista.setText(Double.toString(EmpleadoActualAux2.getAñosTrabajados()));
-            txtPlusAnualAnalista.setText(Double.toString(EmpleadoActualAux2.getPlusAnual()));
-            txtFechaAltaAnalista.setText(EmpleadoActualAux2.getFechaAlta().getTime().toString());
-
-        }
+        Analista EmpleadoActualAux2 = (Analista) Vista.listaAnalistas.getActual().getPrincipal();
+        txtNumeroEmpleadoAnalista.setText(Integer.toString(EmpleadoActualAux2.getNumeroEmple()));
+        txtNombreAnalista.setText(EmpleadoActualAux2.getNombre());
+        txtSueldoAnalista.setText(Double.toString(EmpleadoActualAux2.getSueldo()));
+        txtSueldoMaxAnalista.setText(Double.toString(EmpleadoActualAux2.getSueldoMax()));
+        txtAñosTrabajadosAnalista.setText(Double.toString(EmpleadoActualAux2.getAñosTrabajados()));
+        txtPlusAnualAnalista.setText(Double.toString(EmpleadoActualAux2.getPlusAnual()));
+        txtFechaAltaAnalista.setText(EmpleadoActualAux2.getFechaAlta().getTime().toString());
 
     }
 
@@ -125,6 +111,10 @@ public class EmpleVisualizar extends javax.swing.JPanel {
         btnSiguienteProgramador = new javax.swing.JButton();
         btnAnteriorAnalista = new javax.swing.JButton();
         btnSiguienteAnalista = new javax.swing.JButton();
+        btnPrimeroAnalista = new javax.swing.JButton();
+        btnUltimoAnalista = new javax.swing.JButton();
+        btnPrimeroProgramador = new javax.swing.JButton();
+        btnUltimoProgramador = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 255));
 
@@ -318,6 +308,11 @@ public class EmpleVisualizar extends javax.swing.JPanel {
         });
 
         btnAnteriorAnalista.setText("Anterior");
+        btnAnteriorAnalista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnteriorAnalistaActionPerformed(evt);
+            }
+        });
 
         btnSiguienteAnalista.setText("Siguiente");
         btnSiguienteAnalista.addActionListener(new java.awt.event.ActionListener() {
@@ -326,27 +321,57 @@ public class EmpleVisualizar extends javax.swing.JPanel {
             }
         });
 
+        btnPrimeroAnalista.setText("Primero");
+        btnPrimeroAnalista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrimeroAnalistaActionPerformed(evt);
+            }
+        });
+
+        btnUltimoAnalista.setText("Ultimo");
+        btnUltimoAnalista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUltimoAnalistaActionPerformed(evt);
+            }
+        });
+
+        btnPrimeroProgramador.setText("Primero");
+
+        btnUltimoProgramador.setText("Ultimo");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelAnalista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jPanelAnalista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58)
-                        .addComponent(jPanelProgramador1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(87, 87, 87)
-                        .addComponent(btnAnteriorAnalista)
+                        .addGap(39, 39, 39)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnAnteriorAnalista)
+                            .addComponent(btnPrimeroAnalista))
                         .addGap(54, 54, 54)
-                        .addComponent(btnSiguienteAnalista)
-                        .addGap(134, 134, 134)
-                        .addComponent(btnAnteriorProgramador)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSiguienteAnalista)
+                            .addComponent(btnUltimoAnalista))))
+                .addGap(41, 41, 41)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelProgramador1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(btnAnteriorProgramador))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(btnPrimeroProgramador)))
                         .addGap(71, 71, 71)
-                        .addComponent(btnSiguienteProgramador)))
-                .addContainerGap(250, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnSiguienteProgramador)
+                            .addComponent(btnUltimoProgramador))))
+                .addContainerGap(292, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -356,13 +381,20 @@ public class EmpleVisualizar extends javax.swing.JPanel {
                     .addComponent(jPanelProgramador1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanelAnalista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAnteriorAnalista)
-                    .addComponent(btnSiguienteAnalista)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnSiguienteProgramador)
-                        .addComponent(btnAnteriorProgramador)))
-                .addContainerGap(224, Short.MAX_VALUE))
+                        .addComponent(btnAnteriorProgramador))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAnteriorAnalista)
+                        .addComponent(btnSiguienteAnalista)))
+                .addGap(43, 43, 43)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnPrimeroAnalista)
+                    .addComponent(btnUltimoAnalista)
+                    .addComponent(btnPrimeroProgramador)
+                    .addComponent(btnUltimoProgramador))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -379,40 +411,123 @@ public class EmpleVisualizar extends javax.swing.JPanel {
 
     private void btnAnteriorProgramadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorProgramadorActionPerformed
 
+        mostrarProgramadores();
+        Vista.listaProgramadores.visualizarAnterior();
+
 
     }//GEN-LAST:event_btnAnteriorProgramadorActionPerformed
 
     private void btnSiguienteProgramadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteProgramadorActionPerformed
 
-        mostrarProgramadores();
-        Vista.listaEmpleados.avanzar();
+        try {
+            if (Vista.listaProgramadores.getActual() != null) {
 
-
-        /*if (!listaEmpleados.getActual().esUltimo()) {
-           
-
-            if (listaEmpleados.getActual().esUltimo()) {
-                btnSiguienteProgramador.setEnabled(false);
-
+                mostrarProgramadores();
+                btnAnteriorProgramador.setEnabled(true);
+                Vista.listaProgramadores.avanzar();
             }
 
-        }*/
+        } catch (Exception e) {
+            btnSiguienteProgramador.setEnabled(false);
+
+        }
     }//GEN-LAST:event_btnSiguienteProgramadorActionPerformed
 
     private void btnSiguienteAnalistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteAnalistaActionPerformed
 
-        mostrarAnalistas();
-        Vista.listaEmpleados.avanzar();
+        /*if (!Vista.listaAnalistas.getActual().esUltimo()) {
 
+            mostrarAnalistas();
+            Vista.listaAnalistas.avanzar();
+
+            if (Vista.listaAnalistas.getActual().esUltimo()) {
+                btnSiguienteAnalista.setEnabled(false);
+
+            }
+
+        }*/
+        //para mostrar analistas solamente este es el BUENO
+        try {
+            if (Vista.listaAnalistas.getActual() != null) {
+
+                mostrarAnalistas();
+                btnAnteriorAnalista.setEnabled(true);
+                Vista.listaAnalistas.avanzar();
+            }
+
+        } catch (Exception e) {
+            btnSiguienteAnalista.setEnabled(false);
+
+        }
+
+        // para mostrar toooodos los empleados
+
+        /*try{
+           
+            if (Vista.listaEmpleados.getActual() != null) {
+
+            mostrarEmpleados();
+            btnAnteriorAnalista.setEnabled(true);
+            Vista.listaEmpleados.avanzar();
+        }
+            
+        }catch(Exception e){
+            
+            System.out.println("Error");
+        }*/
+ /*if (!Vista.listaAnalistas.esUltimo()) {
+            mostrarAnalistas();
+            btnAnteriorAnalista.setEnabled(true);
+            Vista.listaAnalistas.avanzar();
+            
+            if (Vista.listaAnalistas.esUltimo() || Vista.listaAnalistas.esVacio()) {
+                btnSiguienteAnalista.setEnabled(false);
+            }
+        }*/
 
     }//GEN-LAST:event_btnSiguienteAnalistaActionPerformed
+
+    private void btnPrimeroAnalistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeroAnalistaActionPerformed
+
+        if (Vista.listaAnalistas.esPrimero()) {
+
+            Analista EmpleadoActualAux2 = (Analista) Vista.listaAnalistas.getActual().getPrincipal();
+            txtNumeroEmpleadoAnalista.setText(Integer.toString(EmpleadoActualAux2.getNumeroEmple()));
+            txtNombreAnalista.setText(EmpleadoActualAux2.getNombre());
+            txtSueldoAnalista.setText(Double.toString(EmpleadoActualAux2.getSueldo()));
+            txtSueldoMaxAnalista.setText(Double.toString(EmpleadoActualAux2.getSueldoMax()));
+            txtAñosTrabajadosAnalista.setText(Double.toString(EmpleadoActualAux2.getAñosTrabajados()));
+            txtPlusAnualAnalista.setText(Double.toString(EmpleadoActualAux2.getPlusAnual()));
+            txtFechaAltaAnalista.setText(EmpleadoActualAux2.getFechaAlta().getTime().toString());
+
+        }
+    }//GEN-LAST:event_btnPrimeroAnalistaActionPerformed
+
+    private void btnUltimoAnalistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoAnalistaActionPerformed
+
+
+    }//GEN-LAST:event_btnUltimoAnalistaActionPerformed
+
+    private void btnAnteriorAnalistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorAnalistaActionPerformed
+
+        
+        
+        Vista.listaAnalistas.visualizarAnterior();
+        mostrarAnalistas();
+
+
+    }//GEN-LAST:event_btnAnteriorAnalistaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnteriorAnalista;
     private javax.swing.JButton btnAnteriorProgramador;
+    private javax.swing.JButton btnPrimeroAnalista;
+    private javax.swing.JButton btnPrimeroProgramador;
     private javax.swing.JButton btnSiguienteAnalista;
     private javax.swing.JButton btnSiguienteProgramador;
+    private javax.swing.JButton btnUltimoAnalista;
+    private javax.swing.JButton btnUltimoProgramador;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

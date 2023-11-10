@@ -55,7 +55,7 @@ public class Analista extends Empleado implements IFecha {
 
     @Override
     public String toString() {
-        return "Analista{" + "Nombre=" + Nombre + ", Sueldo=" + Sueldo + ", SueldoMax=" + SueldoMax + ", FechaAlta=" + FechaAlta + ", Plus Anual=" + plusAnual + ", Años Trabajados=" + AñosTrabajados + '}';
+        return "Analista{" +"Numero Empleado=" + numeroEmple + ", Nombre=" + Nombre + ", Sueldo=" + Sueldo + ", SueldoMax=" + SueldoMax + ", FechaAlta=" + FechaAlta + ", Plus Anual=" + plusAnual + ", Años Trabajados=" + AñosTrabajados + '}';
     }
 
     @Override
