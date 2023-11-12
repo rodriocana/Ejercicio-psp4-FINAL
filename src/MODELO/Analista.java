@@ -7,6 +7,7 @@ package MODELO;
 import static MODELO.IFecha.AÑO;
 import static MODELO.IFecha.DIA_DEL_MES;
 import static MODELO.IFecha.MES_DEL_AÑO;
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 import java.util.GregorianCalendar;
@@ -20,19 +21,16 @@ public class Analista extends Empleado implements IFecha {
     private double plusAnual;
     private int AñosTrabajados;
 
-    public Analista(int numeroEmple, double plusAnual, int AñosTrabajados, String Nombre, double Sueldo, double SueldoMax, GregorianCalendar FechaAlta) throws ESaldoNoValido {
+    /*public Analista(int numeroEmple, double plusAnual, int AñosTrabajados, String Nombre, double Sueldo, double SueldoMax, GregorianCalendar FechaAlta) throws ESaldoNoValido {
         super(numeroEmple, Nombre, Sueldo, SueldoMax, FechaAlta);
         this.plusAnual = plusAnual;
         this.AñosTrabajados = AñosTrabajados;
-    }
-
-    /*public Analista(int numeroEmple, double plusAnual, int AñosTrabajados, String Nombre, double Sueldo, double SueldoMax) throws ESaldoNoValido {
-        super(numeroEmple, Nombre, Sueldo, SueldoMax);
-        this.plusAnual = plusAnual;
-        this.AñosTrabajados = AñosTrabajados;
     }*/
-    public Analista(int numeroEmple, String Nombre, int AñosTrabajados, double Sueldo, double PlusAnual, double SueldoMax) throws ESaldoNoValido {
+
+   
+    public Analista(int numeroEmple, String Nombre, int AñosTrabajados, double Sueldo, double plusAnual, double SueldoMax) throws ESaldoNoValido {
         super(numeroEmple, Nombre, Sueldo, SueldoMax);
+        
         this.plusAnual = plusAnual;
         this.AñosTrabajados = AñosTrabajados;
     }
@@ -55,7 +53,11 @@ public class Analista extends Empleado implements IFecha {
 
     @Override
     public String toString() {
-        return "Analista{" +"Numero Empleado=" + numeroEmple + ", Nombre=" + Nombre + ", Sueldo=" + Sueldo + ", SueldoMax=" + SueldoMax + ", FechaAlta=" + FechaAlta + ", Plus Anual=" + plusAnual + ", Años Trabajados=" + AñosTrabajados + '}';
+        
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String fechaFormateada = formato.format(FechaAlta.getTime());
+        
+        return "Analista{" +"Numero Empleado=" + numeroEmple + ", Nombre=" + Nombre + ", Sueldo=" + Sueldo + ", SueldoMax=" + SueldoMax + ", FechaAlta=" + fechaFormateada + ", Plus Anual=" + plusAnual + ", Años Trabajados=" + AñosTrabajados + '}';
     }
 
     @Override

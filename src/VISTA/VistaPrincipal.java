@@ -12,7 +12,9 @@ import MODELO.Programador;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.List;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,41 +45,87 @@ public class VistaPrincipal extends javax.swing.JFrame {
         mostrarAnalistas();
         mostrarProgramadores();
 
+        btnCreadoMasivo.setVisible(false);
+        btnOrdenar1.setVisible(false);
+
     }
 
     public void crearEmpleadosMasivos() throws ESaldoNoValido {
-
         Random random = new Random();
-        int cantidadEmpleados = random.nextInt(200) + 1000; // He metido menos empleados por que tardaba mucho en ordenarlos
+        int cantidadEmpleados = random.nextInt(200) + 1000;
 
         for (int i = 0; i < cantidadEmpleados; i++) {
-            // Generar valores aleatorios para el sueldo y sueldo máximo
-            double sueldo = 2000; // Entre 1000 y 5000
-            double sueldoMax = 4000;// Mayor que el sueldo
+            //double sueldo = 1000 + 4000 * random.nextDouble(); // Entre 1000 y 5000
+            double sueldo = 1;
+            double sueldoMax = 6000;
+            //double sueldoMax = sueldo + (3000 * random.nextDouble()); // Mayor que el sueldo
 
             String[] nombres = {"Juan", "María", "Luis", "Ana", "Carlos", "Laura", "Pedro", "Sofía", "Diego", "Valeria"};
             String nombreAleatorio = nombres[random.nextInt(nombres.length)];
             int numeroEmpleado = random.nextInt(2000) + 1;
-            //empleado.setNombre(nombreAleatorio); // Nombre aleatorio
 
-            // Crear el empleado con los atributos aleatorios
             Empleado empleado = new Empleado();
-            empleado.setNumeroEmple(numeroEmpleado); // Establecer el número de empleado
-            empleado.setNombre(" " + nombreAleatorio); // Nombre aleatorio o puedes usar bibliotecas para nombres aleatorios
-            //empleado.setSueldo(2000); // Establecer el sueldo
-            //empleado.setSueldoMax(4000); // Establecer el sueldo máximo
+            empleado.setNumeroEmple(numeroEmpleado);
+            empleado.setNombre(nombreAleatorio);
+            //empleado.setSueldo(sueldo);
+            empleado.setSueldoMax(sueldoMax);
 
-            // Comprobar que el sueldo sea menor que el sueldo máximo
-            if (sueldo < sueldoMax) {
-                // Añadir el empleado a la lista principal de empleados
-                listaEmpleados.insertar(empleado);
-            } else {
-                System.out.println("Sueldo mayor que sueldo máximo. No se ha creado el empleado " + empleado.getNumeroEmple());
-            }
+            int year = random.nextInt(44) + 1980; // Años entre 1980 y 2023
+            int month = random.nextInt(12) + 1;
+            int day = random.nextInt(28) + 1; //
+
+            GregorianCalendar fecha = new GregorianCalendar(year, month - 1, day);
+            empleado.setFechaAlta(fecha);
+
+            listaEmpleados.insertar(empleado);
+
         }
         System.out.println("Se han creado " + cantidadEmpleados + " empleados de forma aleatoria.");
     }
 
+    /*public void crearEmpleadosMasivos() throws ESaldoNoValido {
+        Random random = new Random();
+        int cantidadEmpleados = random.nextInt(200) + 1000;
+        double sueldo = 1000 + 4000 * random.nextDouble(); // Entre 1000 y 5000
+        double sueldoMax = sueldo + (3000 * random.nextDouble()); // Mayor que el sueldo
+        double sueldoExtraMensual = 1000 + 4000 * random.nextDouble();
+
+        for (int i = 0; i < cantidadEmpleados; i++) {
+
+            String[] nombres = {"Juan", "María", "Luis", "Ana", "Carlos", "Laura", "Pedro", "Sofía", "Diego", "Valeria"};
+            String[] genero = {"Hombre", "Mujer", "No Binario"};
+            String nombreAleatorio = nombres[random.nextInt(nombres.length)];
+            String generoAleatorio = genero[random.nextInt(genero.length)];
+            int numeroEmpleado = random.nextInt(2000) + 1;
+            int AñosTrabajados = random.nextInt(1) + 20;
+            int plusAnual = random.nextInt(100) + 500;
+
+            Empleado empleado;
+            if (random.nextBoolean()) {
+                Analista analista = new Analista(numeroEmpleado, nombreAleatorio, AñosTrabajados, sueldo, plusAnual, sueldoMax);
+                analista.setNumeroEmple(numeroEmpleado);
+                analista.setNombre(nombreAleatorio);
+                //analista.setSueldo(200);
+                analista.setSueldoMax(8000);
+                analista.setAñosTrabajados(AñosTrabajados);
+                analista.setPlusAnual(plusAnual);
+                empleado = analista;
+                listaAnalistas.insertar(analista);
+            } else {
+                Programador programador = new Programador(numeroEmpleado, nombreAleatorio, generoAleatorio, sueldoExtraMensual, sueldo, sueldoMax);
+                programador.setNumeroEmple(numeroEmpleado);
+                programador.setNombre(nombreAleatorio);
+                //programador.setSueldo(200);
+                //programador.setSueldoMax(8000);
+                programador.setGenero(generoAleatorio);
+                programador.setSueldoExtraMensual(sueldoExtraMensual);
+                empleado = programador;
+                listaProgramadores.insertar(programador);
+            }
+
+        }
+        System.out.println("Se han creado " + cantidadEmpleados + " empleados de forma aleatoria.");
+    }*/
     public void agregarEmpleadosAListas() {
 
         listaEmpleados.agregarEmpleadosAListas(listaAnalistas, listaProgramadores);
@@ -140,9 +188,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnGuardarEmple = new javax.swing.JButton();
         btnInsertarEmple = new javax.swing.JButton();
         btnVisualizarEmple = new javax.swing.JButton();
-        btnCreadoMasivo = new javax.swing.JButton();
         btnListaEmpleados = new javax.swing.JButton();
         btnOrdenar1 = new javax.swing.JButton();
+        btnCreadoMasivo = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         Contenido = new javax.swing.JPanel();
 
@@ -162,7 +210,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         setBackground(new java.awt.Color(0, 51, 204));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setForeground(new java.awt.Color(255, 255, 255));
-        setResizable(false);
         setSize(new java.awt.Dimension(200, 200));
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 102));
@@ -257,26 +304,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnCreadoMasivo.setBackground(new java.awt.Color(26, 73, 136));
-        btnCreadoMasivo.setForeground(new java.awt.Color(255, 255, 255));
-        btnCreadoMasivo.setText("CREADO MASIVO");
-        btnCreadoMasivo.setBorder(null);
-        btnCreadoMasivo.setBorderPainted(false);
-        btnCreadoMasivo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCreadoMasivo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnCreadoMasivoMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnCreadoMasivoMouseExited(evt);
-            }
-        });
-        btnCreadoMasivo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCreadoMasivoActionPerformed(evt);
-            }
-        });
-
         btnListaEmpleados.setBackground(new java.awt.Color(26, 73, 136));
         btnListaEmpleados.setForeground(new java.awt.Color(255, 255, 255));
         btnListaEmpleados.setText("LISTA DE EMPLEADOS");
@@ -317,6 +344,26 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnCreadoMasivo.setBackground(new java.awt.Color(26, 73, 136));
+        btnCreadoMasivo.setForeground(new java.awt.Color(255, 255, 255));
+        btnCreadoMasivo.setText("CREADO MASIVO");
+        btnCreadoMasivo.setBorder(null);
+        btnCreadoMasivo.setBorderPainted(false);
+        btnCreadoMasivo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCreadoMasivo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCreadoMasivoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCreadoMasivoMouseExited(evt);
+            }
+        });
+        btnCreadoMasivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreadoMasivoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -325,7 +372,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
             .addComponent(btnGuardarEmple, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnInsertarEmple, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnVisualizarEmple, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnCreadoMasivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnListaEmpleados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
@@ -333,6 +379,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(btnCreadoMasivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnOrdenar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
@@ -351,11 +398,12 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnVisualizarEmple, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnListaEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCreadoMasivo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnOrdenar1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(btnListaEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4))
         );
 
         jPanel4.setBackground(new java.awt.Color(0, 51, 102));
@@ -382,7 +430,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -461,8 +509,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
             Empleado empleado2 = new Empleado(2, "Maria", 3500.0, 5500.0);
             listaEmpleados.insertar(empleado1);
             listaEmpleados.insertar(empleado2);
-            listaEmpleados.GuardarLista(listaEmpleados);
-            listaEmpleados.serialization();
+            listaEmpleados.serialization(listaEmpleados); // llama a la funcion que guarda los empleados creados
+            
 
         } catch (ESaldoNoValido ex) {
             Logger.getLogger(VistaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -471,7 +519,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     private void btnCargarEmpleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarEmpleActionPerformed
 
-        CargarEmpleados cargarEmpleadosVista = new CargarEmpleados();
+        CargarEmpleados cargarEmpleadosVista = new CargarEmpleados(this);  // al this le paso VISTA
         cargarEmpleadosVista.setSize(740, 650);
         cargarEmpleadosVista.setLocation(0, 0);
 
@@ -561,8 +609,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     private void btnListaEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaEmpleadosActionPerformed
 
+        btnCreadoMasivo.setVisible(true);
+        btnOrdenar1.setVisible(true);
+
         VistaEmpleados = new VistaListaEmpleados(this);
-        VistaEmpleados.setSize(740, 650);
+        VistaEmpleados.setSize(1040, 650);
         VistaEmpleados.setLocation(0, 0);
 
         Contenido.removeAll();

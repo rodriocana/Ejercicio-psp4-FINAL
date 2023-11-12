@@ -31,6 +31,7 @@ public class EmpleVisualizar extends javax.swing.JPanel {
         //mostrarAnalistas();
     }
 
+    //estos los muestro en los textfield de analistas para probar si visualizo los 1000 empleados metidos al azar
     public void mostrarEmpleados() {
 
         Empleado EmpleadoActualAux2 = (Empleado) Vista.listaEmpleados.getActual().getPrincipal();
@@ -40,7 +41,7 @@ public class EmpleVisualizar extends javax.swing.JPanel {
         txtSueldoMaxAnalista.setText(Double.toString(EmpleadoActualAux2.getSueldoMax()));
         //txtAñosTrabajadosAnalista.setText(Double.toString(EmpleadoActualAux2.getAñosTrabajados()));
         //txtPlusAnualAnalista.setText(Double.toString(EmpleadoActualAux2.getPlusAnual()));
-        //txtFechaAltaAnalista.setText(EmpleadoActualAux2.getFechaAlta().getTime().toString());
+        txtFechaAltaAnalista.setText(EmpleadoActualAux2.getFechaAlta().getTime().toString());
 
     }
 
@@ -412,6 +413,8 @@ public class EmpleVisualizar extends javax.swing.JPanel {
     private void btnAnteriorProgramadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorProgramadorActionPerformed
 
         mostrarProgramadores();
+        
+        
         Vista.listaProgramadores.visualizarAnterior();
 
 
@@ -510,8 +513,6 @@ public class EmpleVisualizar extends javax.swing.JPanel {
 
     private void btnAnteriorAnalistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorAnalistaActionPerformed
 
-        
-        
         Vista.listaAnalistas.visualizarAnterior();
         mostrarAnalistas();
 

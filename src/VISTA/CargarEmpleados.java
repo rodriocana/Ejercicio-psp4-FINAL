@@ -4,17 +4,36 @@
  */
 package VISTA;
 
+import CONTROLADOR.Lista;
+import MODELO.Empleado;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
 /**
  *
  * @author Rodri
  */
 public class CargarEmpleados extends javax.swing.JPanel {
 
-    /**
-     * Creates new form CargarEmpleados
-     */
-    public CargarEmpleados() {
+    VistaPrincipal Vista;
+
+    public CargarEmpleados(VistaPrincipal Vista) {
         initComponents();
+
+        this.Vista = Vista;
+    }
+
+    public Lista cargarListaDesdeArchivo() {
+        Lista lista = null;
+        String nombreArchivo = "ListaEmpleadosSerializada.ser";
+        try ( ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(nombreArchivo))) {
+            lista = (Lista) entrada.readObject();
+            System.out.println("Lista cargada desde " + nombreArchivo + " correctamente.");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error al cargar la lista desde el archivo: " + e.getMessage());
+        }
+        return lista;
     }
 
     /**
@@ -27,9 +46,8 @@ public class CargarEmpleados extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txtArchivo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        btnAtrasCargar = new javax.swing.JButton();
         btnCargarLista = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(153, 153, 255));
@@ -41,37 +59,27 @@ public class CargarEmpleados extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Introduce el nombre del archivo a cargar");
 
-        btnAtrasCargar.setText("Atrás");
-        btnAtrasCargar.addActionListener(new java.awt.event.ActionListener() {
+        btnCargarLista.setText("Cargar Lista");
+        btnCargarLista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAtrasCargarActionPerformed(evt);
+                btnCargarListaActionPerformed(evt);
             }
         });
-
-        btnCargarLista.setText("Cargar Lista");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(95, 323, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(95, 323, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(108, 353, Short.MAX_VALUE)
-                        .addComponent(btnCargarLista)))
+                    .addComponent(txtArchivo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCargarLista, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(298, 298, 298))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnAtrasCargar)
-                        .addGap(72, 72, 72))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(200, 200, 200))))
+                .addComponent(jLabel1)
+                .addGap(200, 200, 200))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -79,12 +87,10 @@ public class CargarEmpleados extends javax.swing.JPanel {
                 .addGap(152, 152, 152)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnCargarLista)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 342, Short.MAX_VALUE)
-                .addComponent(btnAtrasCargar)
-                .addGap(23, 23, 23))
+                .addContainerGap(387, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -99,16 +105,18 @@ public class CargarEmpleados extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAtrasCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasCargarActionPerformed
-        
-    }//GEN-LAST:event_btnAtrasCargarActionPerformed
+    private void btnCargarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarListaActionPerformed
+
+        String nombreArchivo = txtArchivo.getText();
+
+        Vista.listaEmpleados.cargarListaDesdeArchivo(nombreArchivo);
+    }//GEN-LAST:event_btnCargarListaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAtrasCargar;
     private javax.swing.JButton btnCargarLista;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtArchivo;
     // End of variables declaration//GEN-END:variables
 }

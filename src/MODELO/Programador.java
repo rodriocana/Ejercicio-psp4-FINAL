@@ -7,6 +7,7 @@ package MODELO;
 import static MODELO.IFecha.AÑO;
 import static MODELO.IFecha.DIA_DEL_MES;
 import static MODELO.IFecha.MES_DEL_AÑO;
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 /**
@@ -52,7 +53,10 @@ public class Programador extends Empleado implements IFecha{
     
     @Override
     public String toString() {
-        return "Programador{" +"Numero Empleado=" + numeroEmple + ", Nombre=" + Nombre + ", Sueldo=" + Sueldo + ", SueldoMax="  + SueldoMax + ", FechaAlta=" + FechaAlta + ", SueldoExtraMensual=" + SueldoExtraMensual + ", Genero=" + Genero + '}';
+        
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String fechaFormateada = formato.format(FechaAlta.getTime());
+        return "Programador{" +"Numero Empleado=" + numeroEmple + ", Nombre=" + Nombre + ", Sueldo=" + Sueldo + ", SueldoMax="  + SueldoMax + ", FechaAlta=" + fechaFormateada + ", SueldoExtraMensual=" + SueldoExtraMensual + ", Genero=" + Genero + '}';
     }
 
     @Override

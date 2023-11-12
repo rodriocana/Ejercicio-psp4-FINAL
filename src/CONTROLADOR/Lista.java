@@ -92,6 +92,7 @@ public class Lista<E> implements Serializable { //------------------------------
         }
     }
 
+    // metodo que mete empleados en listas distintas, analistas y programadores
     public void agregarEmpleadosAListas(Lista listaAnalistas, Lista listaProgramadores) {
         Nodo<E> temporal = this.inicio;
         while (temporal != null) {
@@ -261,7 +262,7 @@ public class Lista<E> implements Serializable { //------------------------------
 
     }
 
-    public void GuardarLista(Lista listaEmpleados) {
+   /* public void GuardarLista(Lista listaEmpleados) {
 
         try ( FileOutputStream fichero = new FileOutputStream("Empleados.ser");  ObjectOutputStream tuberia = new ObjectOutputStream(fichero)) {
             // Escribe la lista de empleados en el archivo
@@ -272,14 +273,14 @@ public class Lista<E> implements Serializable { //------------------------------
         } catch (IOException ex) {
             Logger.getLogger(Lista.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }*/
 
     public Lista getListaEmpleados(Lista listaEmpleados) {
         return listaEmpleados;
     }
 
     //PARA GUARDAR ARCHIVO EMPLEADOS
-    public void serialization() {
+    public void serialization(Lista listaEmpleados) {
 
         try {
             FileOutputStream fileOut = new FileOutputStream("ListaEmpleadosSerializada.ser");
@@ -292,7 +293,7 @@ public class Lista<E> implements Serializable { //------------------------------
                 out.writeObject(aux.getPrincipal());
                 aux = aux.getSiguiente();
             }
-            System.out.println("Lista de empleados guardada correctamente en serializated.ser");
+            System.out.println("Lista de empleados guardada correctamente en la Raiz");
             out.close();
             fileOut.close();
         } catch (FileNotFoundException ex) {
@@ -304,37 +305,18 @@ public class Lista<E> implements Serializable { //------------------------------
     }
 
     //PARA CARGAR ARCHIVO EMPLEADOS
-    /*public ArrayList<E> Deserializar(String filePath){
-        ArrayList<E> lista = new ArrayList<E>();
-        try {
-            FileInputStream fileIn = new FileInputStream(filePath);
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            //nuevaLista = (MyList) in.readObject();
-
-            // while(in.available()>0){ NO FUNCIONA
-            try{
-                while(true){
-                    // si añadimos los empleados desde aqui, no podemos añadir el indice de los empleados
-                    // asi q los metemos en un arraylist los empleados para añadirlos luego
-                    // a la lista con el indice
-                    //add((E)in.readObject());
-                    lista.add((E)in.readObject());
-                }
-            }catch(EOFException ex){};
-
-            in.close();
-            fileIn.close();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Lista.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            //Logger.getLogger(MyList.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Ha ocurrido un error con la eleccion del fichero, puede que no sea tipo .ser o el contenido es de una version anterior.");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Lista.class.getName()).log(Level.SEVERE, null, ex);
+    public Lista cargarListaDesdeArchivo(String nombreArchivo) {
+        Lista lista = null;
+        
+        try ( ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(nombreArchivo))) {
+            lista = (Lista) entrada.readObject();
+            System.out.println("Lista cargada desde " + nombreArchivo + " correctamente.");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error al cargar la lista desde el archivo: " + e.getMessage());
         }
         return lista;
-    }*/
-    // METODO QUE GUARDA EN nodoVisualizar (el empleado actual) el empleado siguiente.
+    }
+
     public E avanzar() {
 
         actual = actual.getSiguiente();
@@ -343,19 +325,6 @@ public class Lista<E> implements Serializable { //------------------------------
 
     }
 
-    /*public void visualizarAnterior() //recorre desde el principio de la lista para toparse con el que va antes del visualizado
-    {
-
-        Nodo<E> nodoAnterior = null;
-        Nodo<E> nodoActual = inicio;
-
-        while (nodoActual != nodoVisualizar) {
-            nodoAnterior = nodoActual;
-            nodoActual = nodoActual.getSiguiente();
-        }
-
-        nodoVisualizar = nodoAnterior;
-    }*/
     public E visualizarAnterior() {
         if (this.actual == null || this.actual.getAnterior() == null) {
             return null; // No hay empleado anterior

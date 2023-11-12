@@ -5,6 +5,7 @@
 package MODELO;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 /**
@@ -20,13 +21,12 @@ public class Empleado implements Serializable {
     GregorianCalendar FechaAlta;
 
     public Empleado(int numeroEmple, String Nombre, double Sueldo, double SueldoMax, GregorianCalendar FechaAlta) throws ESaldoNoValido {
-        
+
         this.numeroEmple = numeroEmple;
         this.Nombre = Nombre;
         this.Sueldo = Sueldo;
         this.SueldoMax = SueldoMax;
         this.FechaAlta = new GregorianCalendar();
-                
 
         // AQUI CREAMOS UNA EXCEPCION DENTRO DEL CONSTRUCTOR
         if (Sueldo > SueldoMax) {
@@ -37,7 +37,7 @@ public class Empleado implements Serializable {
     }
 
     public Empleado(int numeroEmple, String Nombre, double Sueldo, double SueldoMax) throws ESaldoNoValido {
-        
+
         this.numeroEmple = numeroEmple;
         this.Nombre = Nombre;
         this.Sueldo = Sueldo;
@@ -109,9 +109,16 @@ public class Empleado implements Serializable {
         this.FechaAlta = Fecha;
     }
 
+    
     @Override
     public String toString() {
-        return "Empleado{ " + "NumeroEmpleado=" + numeroEmple + " , Nombre=" + Nombre +", Sueldo=" + Sueldo + ", SueldoMax=" + SueldoMax + ", FechaAlta=" + FechaAlta + '}';
+        
+        
+        
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+        String fechaFormateada = formato.format(FechaAlta.getTime());
+
+        return "Empleado{ " + "NumeroEmpleado=" + numeroEmple + " , Nombre=" + Nombre + ", Sueldo=" + Sueldo + ", SueldoMax=" + SueldoMax + ", FechaAlta=" + fechaFormateada + '}';
     }
 
 }
