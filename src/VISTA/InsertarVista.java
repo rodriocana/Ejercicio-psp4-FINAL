@@ -320,13 +320,16 @@ public class InsertarVista extends javax.swing.JPanel {
 
             Programador prog = new Programador(numeroEmple, Nombre, Genero, Sueldo, SueldoExtraMensual, SueldoMax);
             Vista.listaEmpleados.insertar(prog); // INSTERTAMOS EL EMPLEADO
+            Vista.listaEmpleados.mostrarLista();
+            Vista.listaProgramadores.mostrarProgramadores();
+            Vista.listaEmpleados.mostrarProgramadores();
             System.out.println("El empleado programador ha sido creado");
 
         } catch (ESaldoNoValido ex) {
             Logger.getLogger(VistaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        Vista.listaEmpleados.mostrarLista();
+
     }//GEN-LAST:event_btnInsertarProgramador1ActionPerformed
 
     private void btnInsertarAnalistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarAnalistaActionPerformed

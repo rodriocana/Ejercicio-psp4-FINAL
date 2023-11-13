@@ -32,6 +32,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
     Lista listaProgramadores = new Lista();
 
     VistaListaEmpleados VistaEmpleados;  // instanciamos un objeto de tipo VistaListaEmpleados para poder acceder al panel de jList.
+    CreadoMasivoVista VistaCreadoMasivo;
+    OrdenarVista VistaOrdenar;
 
     public VistaPrincipal() {
         initComponents();
@@ -510,7 +512,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
             listaEmpleados.insertar(empleado1);
             listaEmpleados.insertar(empleado2);
             listaEmpleados.serialization(listaEmpleados); // llama a la funcion que guarda los empleados creados
-            
 
         } catch (ESaldoNoValido ex) {
             Logger.getLogger(VistaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -604,6 +605,16 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         System.out.println("Se ha ordenado la lista en JList");
         listaEmpleados.ordenarPorNumeroEmpleado();
+
+        VistaOrdenar = new OrdenarVista(this);
+        VistaOrdenar.setSize(1040, 650);
+        VistaOrdenar.setLocation(0, 0);
+
+        Contenido.removeAll();
+        Contenido.add(VistaOrdenar, BorderLayout.CENTER);
+        Contenido.revalidate();
+        Contenido.repaint();
+
         //listaAnalistas.ordenarPorNumeroEmpleado(); // si quiero ordenar solamente los analistas
     }//GEN-LAST:event_btnOrdenar1ActionPerformed
 
@@ -627,9 +638,21 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         try {
             crearEmpleadosMasivos();
+
         } catch (ESaldoNoValido ex) {
             Logger.getLogger(VistaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        VistaCreadoMasivo = new CreadoMasivoVista(this);
+        VistaCreadoMasivo.setSize(1040, 650);
+        VistaCreadoMasivo.setLocation(0, 0);
+
+        Contenido.removeAll();
+        Contenido.add(VistaCreadoMasivo, BorderLayout.CENTER);
+        Contenido.revalidate();
+        Contenido.repaint();
+
+
     }//GEN-LAST:event_btnCreadoMasivoActionPerformed
 
     public static void main(String args[]) {

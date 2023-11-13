@@ -42,20 +42,15 @@ public class Lista<E> implements Serializable { //------------------------------
     // para ver si el empleado es el primero o no
 
     public boolean esPrimero() {
-        if (this.actual.getAnterior() != null) {
-            return false;
-        } else {
-            return true;
-        }
+        return actual != null && actual.getAnterior() == null;
     }
 
     //para ver si el empleado es ultimo o no
     public boolean esUltimo() {
-        if (this.actual.getSiguiente() != null) {
-            return false;
-        } else {
-            return true;
-        }
+        
+        
+        
+        return actual != null && actual.getSiguiente() == null;
     }
 
     public boolean esVacio() {
@@ -64,6 +59,13 @@ public class Lista<E> implements Serializable { //------------------------------
         } else {
             return false;
         }
+    }
+    
+    public boolean isLast(){
+        if(this.actual.getSiguiente()!= null){
+            return false;
+        }else
+            return true;
     }
 
     public Nodo<E> getNodoActual() {
@@ -134,31 +136,7 @@ public class Lista<E> implements Serializable { //------------------------------
         }
     }
 
-    /*public boolean Sort() {
-
-        Nodo<E> emple1 = inicio;
-        Nodo<E> emple2 = emple1.siguiente;
-
-        while (emple1 != null) {
-
-            while (emple2 != null) {
-
-                if (emple1.getIndice() > emple2.getIndice()) {
-
-                   // intercambiarNodos();
-                }
-
-                emple2 = emple2.getSiguiente();
-            }
-
-            emple1 = emple1.getSiguiente();
-            emple2 = emple1.getSiguiente();
-
-        }
-
-        return true;
-
-    }*/
+    
     // METODO PARA ORDENAR POR NUMERO EMPLEADO
     public void ordenarPorNumeroEmpleado() {
         Nodo<E> empleado1, empleado2;
@@ -208,6 +186,9 @@ public class Lista<E> implements Serializable { //------------------------------
         }
     }
 
+    
+    // PARA BORRAR UN NODO
+    
     /*public void BorrarNodo(E emple){
 
         Nodo<E> temporal = this.inicio;
@@ -245,6 +226,8 @@ public class Lista<E> implements Serializable { //------------------------------
         this.inicio = null;
         this.actual = null;
     }*/
+    
+    // PARA MODIFICAR UN NODO
 
  /*public void modificar(E nodeToModify,E newData){  // new data para añador nuevos datos en textfield
         Nodo<E> temporal = this.inicio;
@@ -256,25 +239,14 @@ public class Lista<E> implements Serializable { //------------------------------
             temporal=temporal.getSiguiente();
         }
     }*/
+    
     public E visualizarActual() {
 
         return this.actual.getPrincipal();
 
     }
 
-   /* public void GuardarLista(Lista listaEmpleados) {
-
-        try ( FileOutputStream fichero = new FileOutputStream("Empleados.ser");  ObjectOutputStream tuberia = new ObjectOutputStream(fichero)) {
-            // Escribe la lista de empleados en el archivo
-            tuberia.writeObject(listaEmpleados.getActual());
-            System.out.println("Lista de empleados guardada correctamente en Empleados.txt");
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Lista.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Lista.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }*/
-
+    
     public Lista getListaEmpleados(Lista listaEmpleados) {
         return listaEmpleados;
     }
@@ -307,7 +279,7 @@ public class Lista<E> implements Serializable { //------------------------------
     //PARA CARGAR ARCHIVO EMPLEADOS
     public Lista cargarListaDesdeArchivo(String nombreArchivo) {
         Lista lista = null;
-        
+
         try ( ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(nombreArchivo))) {
             lista = (Lista) entrada.readObject();
             System.out.println("Lista cargada desde " + nombreArchivo + " correctamente.");
@@ -318,11 +290,11 @@ public class Lista<E> implements Serializable { //------------------------------
     }
 
     public E avanzar() {
-
-        actual = actual.getSiguiente();
-
-        return (E) this.actual.getSiguiente();
-
+        if (actual != null && actual.getSiguiente() != null) {
+            actual = actual.getSiguiente();
+            return (E) this.actual.getPrincipal();
+        }
+        return null; // O maneja este caso de acuerdo a tu lógica.
     }
 
     public E visualizarAnterior() {

@@ -48,6 +48,7 @@ public class EmpleVisualizar extends javax.swing.JPanel {
     public void mostrarProgramadores() {
 
         Programador EmpleadoActualAux = (Programador) Vista.listaProgramadores.getActual().getPrincipal();
+
         txtNumeroEmpleadoProg1.setText(Integer.toString(EmpleadoActualAux.getNumeroEmple()));
         txtNombreProg1.setText(EmpleadoActualAux.getNombre());
         txtSueldoProg1.setText(Double.toString(EmpleadoActualAux.getSueldo()));
@@ -337,8 +338,18 @@ public class EmpleVisualizar extends javax.swing.JPanel {
         });
 
         btnPrimeroProgramador.setText("Primero");
+        btnPrimeroProgramador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrimeroProgramadorActionPerformed(evt);
+            }
+        });
 
         btnUltimoProgramador.setText("Ultimo");
+        btnUltimoProgramador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUltimoProgramadorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -412,55 +423,53 @@ public class EmpleVisualizar extends javax.swing.JPanel {
 
     private void btnAnteriorProgramadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorProgramadorActionPerformed
 
-        mostrarProgramadores();
-        
-        
-        Vista.listaProgramadores.visualizarAnterior();
+        btnSiguienteProgramador.setEnabled(true);
+
+        if (!Vista.listaProgramadores.esPrimero()) {
+            mostrarProgramadores();
+            Vista.listaProgramadores.visualizarAnterior();
+
+        } else {
+
+            mostrarProgramadores();
+            Vista.listaProgramadores.visualizarAnterior();
+            btnAnteriorProgramador.setEnabled(false);
+
+        }
 
 
     }//GEN-LAST:event_btnAnteriorProgramadorActionPerformed
 
     private void btnSiguienteProgramadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteProgramadorActionPerformed
 
-        try {
-            if (Vista.listaProgramadores.getActual() != null) {
+        btnAnteriorProgramador.setEnabled(true);
 
-                mostrarProgramadores();
-                btnAnteriorProgramador.setEnabled(true);
-                Vista.listaProgramadores.avanzar();
-            }
+        if (!Vista.listaProgramadores.esUltimo()) {
+            mostrarProgramadores();
+            Vista.listaProgramadores.avanzar();
 
-        } catch (Exception e) {
+        } else {
+            mostrarProgramadores();
+            Vista.listaProgramadores.avanzar();
             btnSiguienteProgramador.setEnabled(false);
-
         }
+
+
     }//GEN-LAST:event_btnSiguienteProgramadorActionPerformed
 
     private void btnSiguienteAnalistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteAnalistaActionPerformed
 
-        /*if (!Vista.listaAnalistas.getActual().esUltimo()) {
-
+        btnAnteriorAnalista.setEnabled(true);
+        btnSiguienteAnalista.setEnabled(true);
+        //para mostrar analistas solamente este es el BUENO
+        if (!Vista.listaAnalistas.esUltimo()) {
             mostrarAnalistas();
             Vista.listaAnalistas.avanzar();
 
-            if (Vista.listaAnalistas.getActual().esUltimo()) {
-                btnSiguienteAnalista.setEnabled(false);
-
-            }
-
-        }*/
-        //para mostrar analistas solamente este es el BUENO
-        try {
-            if (Vista.listaAnalistas.getActual() != null) {
-
-                mostrarAnalistas();
-                btnAnteriorAnalista.setEnabled(true);
-                Vista.listaAnalistas.avanzar();
-            }
-
-        } catch (Exception e) {
+        } else {
+            mostrarAnalistas();
+            Vista.listaAnalistas.avanzar();
             btnSiguienteAnalista.setEnabled(false);
-
         }
 
         // para mostrar toooodos los empleados
@@ -503,21 +512,88 @@ public class EmpleVisualizar extends javax.swing.JPanel {
             txtPlusAnualAnalista.setText(Double.toString(EmpleadoActualAux2.getPlusAnual()));
             txtFechaAltaAnalista.setText(EmpleadoActualAux2.getFechaAlta().getTime().toString());
 
+            Vista.listaAnalistas.mostrarAnalistas();
+
         }
     }//GEN-LAST:event_btnPrimeroAnalistaActionPerformed
 
     private void btnUltimoAnalistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoAnalistaActionPerformed
+
+        Vista.listaAnalistas.mostrarAnalistas();
+
+        if (Vista.listaAnalistas.esUltimo()) {
+
+            Analista EmpleadoActualAux2 = (Analista) Vista.listaAnalistas.getActual().getPrincipal();
+
+            txtNumeroEmpleadoAnalista.setText(Integer.toString(EmpleadoActualAux2.getNumeroEmple()));
+            txtNombreAnalista.setText(EmpleadoActualAux2.getNombre());
+            txtSueldoAnalista.setText(Double.toString(EmpleadoActualAux2.getSueldo()));
+            txtSueldoMaxAnalista.setText(Double.toString(EmpleadoActualAux2.getSueldoMax()));
+            txtAñosTrabajadosAnalista.setText(Double.toString(EmpleadoActualAux2.getAñosTrabajados()));
+            txtPlusAnualAnalista.setText(Double.toString(EmpleadoActualAux2.getPlusAnual()));
+            txtFechaAltaAnalista.setText(EmpleadoActualAux2.getFechaAlta().getTime().toString());
+
+        }
 
 
     }//GEN-LAST:event_btnUltimoAnalistaActionPerformed
 
     private void btnAnteriorAnalistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorAnalistaActionPerformed
 
-        Vista.listaAnalistas.visualizarAnterior();
-        mostrarAnalistas();
+        btnSiguienteAnalista.setEnabled(true);
+
+        if (!Vista.listaAnalistas.esPrimero()) {
+            mostrarAnalistas();
+            Vista.listaAnalistas.visualizarAnterior();
+
+        } else {
+
+            mostrarAnalistas();
+            Vista.listaAnalistas.visualizarAnterior();
+            btnAnteriorAnalista.setEnabled(false);
+
+        }
 
 
     }//GEN-LAST:event_btnAnteriorAnalistaActionPerformed
+
+    private void btnPrimeroProgramadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeroProgramadorActionPerformed
+
+        if (Vista.listaProgramadores.esPrimero()) {
+
+            Programador EmpleadoActualAux = (Programador) Vista.listaProgramadores.getActual().getPrincipal();
+
+            txtNumeroEmpleadoProg1.setText(Integer.toString(EmpleadoActualAux.getNumeroEmple()));
+            txtNombreProg1.setText(EmpleadoActualAux.getNombre());
+            txtSueldoProg1.setText(Double.toString(EmpleadoActualAux.getSueldo()));
+            txtSueldoMaxProg1.setText(Double.toString(EmpleadoActualAux.getSueldoMax()));
+            txtSueldoExtrMensualProg1.setText(Double.toString(EmpleadoActualAux.getSueldoExtraMensual()));
+            txtGeneroProg1.setText(EmpleadoActualAux.getGenero());
+            txtFechaAltaProg1.setText(EmpleadoActualAux.getFechaAlta().getTime().toString());
+            
+            Vista.listaProgramadores.mostrarAnalistas();
+
+        }
+    }//GEN-LAST:event_btnPrimeroProgramadorActionPerformed
+
+    private void btnUltimoProgramadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoProgramadorActionPerformed
+       
+        if (Vista.listaProgramadores.esUltimo()) {
+
+            Programador EmpleadoActualAux = (Programador) Vista.listaProgramadores.getActual().getPrincipal();
+
+            txtNumeroEmpleadoProg1.setText(Integer.toString(EmpleadoActualAux.getNumeroEmple()));
+            txtNombreProg1.setText(EmpleadoActualAux.getNombre());
+            txtSueldoProg1.setText(Double.toString(EmpleadoActualAux.getSueldo()));
+            txtSueldoMaxProg1.setText(Double.toString(EmpleadoActualAux.getSueldoMax()));
+            txtSueldoExtrMensualProg1.setText(Double.toString(EmpleadoActualAux.getSueldoExtraMensual()));
+            txtGeneroProg1.setText(EmpleadoActualAux.getGenero());
+            txtFechaAltaProg1.setText(EmpleadoActualAux.getFechaAlta().getTime().toString());
+            
+            Vista.listaProgramadores.mostrarAnalistas();
+
+        }
+    }//GEN-LAST:event_btnUltimoProgramadorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
