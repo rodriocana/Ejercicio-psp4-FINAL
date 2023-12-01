@@ -111,7 +111,7 @@ public class Lista<E> implements Serializable { //------------------------------
 
     }
 
-    public void mostrarAnalistas() {
+    public void mostrarAnalistasOutPut() {
         Nodo<E> temporal = this.inicio;
         System.out.println("****ANALISTAS****");
         while (temporal != null) {
@@ -124,7 +124,7 @@ public class Lista<E> implements Serializable { //------------------------------
         }
     }
 
-    public void mostrarProgramadores() {
+    public void mostrarProgramadoresOutPut() {
         Nodo<E> temporal = this.inicio;
         System.out.println("****PROGRAMADORES****");
         while (temporal != null) {
@@ -255,7 +255,7 @@ public class Lista<E> implements Serializable { //------------------------------
     public void serialization(Lista listaEmpleados) {
 
         try {
-            FileOutputStream fileOut = new FileOutputStream("ListaEmpleadosSerializada.ser");
+            FileOutputStream fileOut = new FileOutputStream("LISTA-PRUEBA.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
 
             Nodo aux = this.inicio;

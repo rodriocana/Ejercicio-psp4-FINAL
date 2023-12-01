@@ -26,9 +26,10 @@ public class EmpleVisualizar extends javax.swing.JPanel {
         initComponents();
 
         this.Vista = Vista;
-
-        //mostrarProgramadores();
-        //mostrarAnalistas();
+        
+        mostrarProgramadores();
+        mostrarAnalistas();
+        //Vista.mostrarProgramadoresOutPut();
     }
 
     //estos los muestro en los textfield de analistas para probar si visualizo los 1000 empleados metidos al azar
@@ -488,7 +489,7 @@ public class EmpleVisualizar extends javax.swing.JPanel {
             System.out.println("Error");
         }*/
  /*if (!Vista.listaAnalistas.esUltimo()) {
-            mostrarAnalistas();
+            mostrarAnalistasOutPut();
             btnAnteriorAnalista.setEnabled(true);
             Vista.listaAnalistas.avanzar();
             
@@ -512,14 +513,14 @@ public class EmpleVisualizar extends javax.swing.JPanel {
             txtPlusAnualAnalista.setText(Double.toString(EmpleadoActualAux2.getPlusAnual()));
             txtFechaAltaAnalista.setText(EmpleadoActualAux2.getFechaAlta().getTime().toString());
 
-            Vista.listaAnalistas.mostrarAnalistas();
+            mostrarAnalistas();
 
         }
     }//GEN-LAST:event_btnPrimeroAnalistaActionPerformed
 
     private void btnUltimoAnalistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoAnalistaActionPerformed
 
-        Vista.listaAnalistas.mostrarAnalistas();
+        Vista.listaAnalistas.mostrarAnalistasOutPut();
 
         if (Vista.listaAnalistas.esUltimo()) {
 
@@ -571,7 +572,7 @@ public class EmpleVisualizar extends javax.swing.JPanel {
             txtGeneroProg1.setText(EmpleadoActualAux.getGenero());
             txtFechaAltaProg1.setText(EmpleadoActualAux.getFechaAlta().getTime().toString());
             
-            Vista.listaProgramadores.mostrarAnalistas();
+            Vista.listaProgramadores.mostrarAnalistasOutPut();
 
         }
     }//GEN-LAST:event_btnPrimeroProgramadorActionPerformed
@@ -590,7 +591,7 @@ public class EmpleVisualizar extends javax.swing.JPanel {
             txtGeneroProg1.setText(EmpleadoActualAux.getGenero());
             txtFechaAltaProg1.setText(EmpleadoActualAux.getFechaAlta().getTime().toString());
             
-            Vista.listaProgramadores.mostrarAnalistas();
+            Vista.listaProgramadores.mostrarAnalistasOutPut();
 
         }
     }//GEN-LAST:event_btnUltimoProgramadorActionPerformed

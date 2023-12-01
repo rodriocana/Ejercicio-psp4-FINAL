@@ -41,6 +41,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
         VistaEmpleados = new VistaListaEmpleados(this);
 
         CrearEmpleados();
+        
+        
 
         //mostrarEmpleados();  // para mostrarlos todos juntos
         agregarEmpleadosAListas(); // aqui guardo en dos listas distintas a los empleados, lista Analistas y lista Programadores
@@ -139,11 +141,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }
 
     public void mostrarAnalistas() {
-        listaAnalistas.mostrarAnalistas();
+        listaAnalistas.mostrarAnalistasOutPut();
     }
 
     public void mostrarProgramadores() {
-        listaProgramadores.mostrarProgramadores();
+        listaProgramadores.mostrarProgramadoresOutPut();
     }
 
     private void CrearEmpleados() {

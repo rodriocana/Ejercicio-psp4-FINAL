@@ -22,8 +22,11 @@ public class InsertarVista extends javax.swing.JPanel {
 
     public InsertarVista(VistaPrincipal Vista) {
         initComponents();
+        
 
         this.Vista = Vista;
+        
+        
 
     }
 
@@ -321,8 +324,8 @@ public class InsertarVista extends javax.swing.JPanel {
             Programador prog = new Programador(numeroEmple, Nombre, Genero, Sueldo, SueldoExtraMensual, SueldoMax);
             Vista.listaEmpleados.insertar(prog); // INSTERTAMOS EL EMPLEADO
             Vista.listaEmpleados.mostrarLista();
-            Vista.listaProgramadores.mostrarProgramadores();
-            Vista.listaEmpleados.mostrarProgramadores();
+            Vista.listaProgramadores.mostrarProgramadoresOutPut();
+            Vista.listaEmpleados.mostrarProgramadoresOutPut();
             System.out.println("El empleado programador ha sido creado");
 
         } catch (ESaldoNoValido ex) {
